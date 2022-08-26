@@ -7,6 +7,8 @@ import com.shiyi.vo.DataVO;
 import com.shiyi.vo.PropertyVO;
 import com.shiyi.vo.RequestVO;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,14 +17,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @SpringBootTest
 class DemoApplicationTests {
+
+	private static final Logger logger = LoggerFactory.getLogger(DemoApplicationTests.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -34,7 +41,26 @@ class DemoApplicationTests {
 	private String secret;
 	@Value("${wx.openId}")
 	private String openId;
+
+	private static final List<String> list = new ArrayList<>();
+
+	private int number = 0;
+
 	SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+	static {
+		InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("like.text");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(resourceAsStream)));
+		String content = null;
+		while (true) {
+			try {
+				if ((content = reader.readLine()) == null) break;
+			} catch (IOException e) {
+				logger.error("读取文件内容失败，异常信息为：{}",e.getMessage());
+			}
+			list.add(content);
+		}
+	}
 
 	@Test
 	void contextLoads() {
@@ -69,8 +95,12 @@ class DemoApplicationTests {
 				.setWindLevel(PropertyVO.init(weather.getWin_speed(),"#F709F7"))
 				.setAirPressure(PropertyVO.init(weather.getPressure(),"#99667B"))
 				.setAirQuality(PropertyVO.init(weather.getAir(),"#669999"))
-				.setPresence(PropertyVO.init("今天又是元气满满的一天","#22DDB8"))
+				.setPresence(PropertyVO.init(list.get(number),"#22DDB8"))
 				.setBirthday(PropertyVO.init(getBirthDay("1998-03-11"),"#0033FF"));
+		number++;
+		if (number > list.size() - 1) {
+			number = 0;
+		}
 		return new RequestVO().setTouser(openId).setData(data);
 	}
 
