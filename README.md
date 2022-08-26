@@ -3,7 +3,7 @@
 ![输入图片说明](1661482308125.png)
 
 1. 设置配置文件中的微信公众测试号的appid和secret，以及接收者的openId
-```
+```properties
 wx.appid=
 wx.secret=
 wx.openId=
@@ -13,5 +13,24 @@ wx.openId=
 3. 修改获取天气信息接口中的cityId为你女朋友所在的城市id，如不知道城市id的可前往这个地址下载文档[https://yikeapi.com/help/tianqicity](https://yikeapi.com/help/tianqicity)获取
 
 4. 修改RequestVO类中的模板id
+
+5. 模板内容信息如下
+```text
+今天是我们恋爱的第{{love.DATA}}天
+距离乖乖宝贝的生日还有{{birthday.DATA}}天
+乖乖宝贝的城市：{{city.DATA}}
+今天的日期是：{{date.DATA}}
+下面由我来给你播报一下天气状况 (o‘ .)
+今天的天气：{{weather.DATA}}
+最低气温：{{minTemperature.DATA}}
+最高气温：{{maxTemperature.DATA}}
+湿度：{{humidity.DATA}}
+风向：{{windDirection.DATA}}
+风力等级：{{windLevel.DATA}}
+气压hPa: {{airPressure.DATA}}
+空气质量: {{airQuality.DATA}}
+寄言：
+{{presence.DATA}}
+```
 
 最终启动项目即可
