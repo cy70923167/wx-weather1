@@ -27,9 +27,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @SpringBootTest
-class DemoApplicationTests {
+class WeatherApplicationTests {
 
-	private static final Logger logger = LoggerFactory.getLogger(DemoApplicationTests.class);
+	private static final Logger logger = LoggerFactory.getLogger(WeatherApplicationTests.class);
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -64,7 +64,7 @@ class DemoApplicationTests {
 
 	@Test
 	void contextLoads() {
-	/*	RequestVO requestVO = buildData();
+		RequestVO requestVO = buildData();
 		AccessTokenDTO accessToken = getAccessToken();
 
 		String json = gson.toJson(requestVO);
@@ -75,7 +75,7 @@ class DemoApplicationTests {
 		String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + accessToken.getAccess_token();
 		Object result = restTemplate.postForObject(url, formEntity, Object.class);
 		assert result != null;
-		System.out.println("发送成功,结果为：" + result);*/
+		System.out.println("发送成功,结果为：" + result);
 	}
 
 	/**
@@ -138,7 +138,7 @@ class DemoApplicationTests {
 	 * @return
 	 */
 	private WeatherDTO getWeather() {
-		String url = "https://www.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&cityId=101250101";
+		String url = "https://www.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=长沙";
 		return restTemplate.getForObject(url, WeatherDTO.class);
 	}
 

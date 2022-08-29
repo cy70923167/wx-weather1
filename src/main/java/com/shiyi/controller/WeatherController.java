@@ -1,19 +1,19 @@
 package com.shiyi.controller;
 
-import com.shiyi.scheduled.DemoScheduled;
+import com.shiyi.scheduled.WeatherScheduled;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class DemoController {
+public class WeatherController {
 
-    private final DemoScheduled demoScheduled;
+    private final WeatherScheduled weatherScheduled;
 
-    @GetMapping("/test")
+    @GetMapping("/")
     public String demo() {
-        demoScheduled.weather();
+        weatherScheduled.weather();
         return "发送成功";
     }
 }

@@ -27,7 +27,7 @@ import java.util.*;
 @Slf4j
 @Configuration
 @EnableScheduling
-public class DemoScheduled {
+public class WeatherScheduled {
 
     @Autowired
     private RestTemplate restTemplate;
