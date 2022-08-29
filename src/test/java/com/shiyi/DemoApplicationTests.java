@@ -64,7 +64,7 @@ class DemoApplicationTests {
 
 	@Test
 	void contextLoads() {
-		RequestVO requestVO = buildData();
+	/*	RequestVO requestVO = buildData();
 		AccessTokenDTO accessToken = getAccessToken();
 
 		String json = gson.toJson(requestVO);
@@ -75,7 +75,7 @@ class DemoApplicationTests {
 		String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + accessToken.getAccess_token();
 		Object result = restTemplate.postForObject(url, formEntity, Object.class);
 		assert result != null;
-		System.out.println("发送成功,结果为：" + result);
+		System.out.println("发送成功,结果为：" + result);*/
 	}
 
 	/**

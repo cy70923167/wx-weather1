@@ -63,7 +63,7 @@ public class DemoScheduled {
 
 
     @Scheduled(cron = "0 14 13 * * ? ")
-    public void demo (){
+    public void weather (){
         RequestVO requestVO = buildData();
         send(requestVO);
     }
@@ -147,7 +147,7 @@ public class DemoScheduled {
      * @return
      */
     private WeatherDTO getWeather() {
-        String url = "https://www.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&cityId=101250101";
+        String url = "https://v0.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=长沙";
         return restTemplate.getForObject(url, WeatherDTO.class);
     }
 
