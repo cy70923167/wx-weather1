@@ -1,5 +1,6 @@
 package com.shiyi.scheduled;
 
+import cn.hutool.core.date.ChineseDate;
 import com.google.gson.Gson;
 import com.shiyi.dto.AccessTokenDTO;
 import com.shiyi.dto.WeatherDTO;
@@ -22,6 +23,7 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -40,6 +42,21 @@ public class WeatherScheduled {
     private String secret;
     @Value("${wx.openId}")
     private String openId;
+
+    @Value("${spouse.birthday}")
+    private String birthday;
+
+    @Value("${first.day.of.love}")
+    private String loveDay;
+
+    @Value("${acacia.city}")
+    private String cityName;
+
+    @Value("${birthday.chineseDate}")
+    private Boolean isChineseDate;
+
+    @Value("${message.template.id}")
+    private String msgTempId;
 
     private static final List<String> list = new ArrayList<>();
 
@@ -62,7 +79,7 @@ public class WeatherScheduled {
     }
 
 
-    @Scheduled(cron = "0 14 13 * * ? ")
+    @Scheduled(cron = "${cron.set}")
     public void weather (){
         RequestVO requestVO = buildData();
         send(requestVO);
@@ -104,12 +121,12 @@ public class WeatherScheduled {
                 .setAirPressure(PropertyVO.init(weather.getPressure(),"#99667B"))
                 .setAirQuality(PropertyVO.init(weather.getAir(),"#669999"))
                 .setPresence(PropertyVO.init(list.get(number),"#22DDB8"))
-                .setBirthday(PropertyVO.init(getBirthDay("1998-03-11"),"#0033FF"));
+                .setBirthday(PropertyVO.init(getBirthDay(birthday),"#0033FF"));
         number++;
         if (number > list.size() - 1) {
             number = 0;
         }
-        return new RequestVO().setTouser(openId).setData(data);
+        return new RequestVO().setTouser(openId).setData(data).setTemplate_id(msgTempId);
     }
 
     /**
@@ -119,7 +136,7 @@ public class WeatherScheduled {
     private long getLoveDay()  {
         try {
             // 转换成日期
-            Date dte = myFormatter.parse("2022-07-25");
+            Date dte = myFormatter.parse(loveDay);
             // 时间转换成毫秒值
             long datetime = dte.getTime();
             // 获取当前日期毫秒值
@@ -147,7 +164,7 @@ public class WeatherScheduled {
      * @return
      */
     private WeatherDTO getWeather() {
-        String url = "https://v0.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=长沙";
+        String url = "https://v0.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=商丘";
         return restTemplate.getForObject(url, WeatherDTO.class);
     }
 
@@ -160,7 +177,21 @@ public class WeatherScheduled {
         try {
             Calendar cToday = Calendar.getInstance(); // 存今天
             Calendar cBirth = Calendar.getInstance(); // 存生日
-            cBirth.setTime(myFormatter.parse(birthday)); // 设置生日
+
+            Date birthdate;
+            if (isChineseDate){
+                List<Integer> nyr = Arrays.stream(birthday.split("-"))
+                        .map(Integer::valueOf).collect(Collectors.toList());
+                int year = cToday.get(Calendar.YEAR);
+                //传入今年阴历生日获取洋历日期
+                ChineseDate chineseDate = new ChineseDate(year,nyr.get(1),nyr.get(2));
+                birthdate = chineseDate.getGregorianDate();
+                System.out.println("birthdate = " + birthdate);
+            }else {
+                birthdate = myFormatter.parse(birthday);
+            }
+
+            cBirth.setTime(birthdate); // 设置生日
             cBirth.set(Calendar.YEAR, cToday.get(Calendar.YEAR)); // 修改为本年
             if (cBirth.get(Calendar.DAY_OF_YEAR) < cToday.get(Calendar.DAY_OF_YEAR)) {
                 // 生日已经过了，要算明年的了
