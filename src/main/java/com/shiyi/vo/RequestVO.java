@@ -16,7 +16,7 @@ public class RequestVO {
     /**
      * 模板id
      */
-    private String template_id = "4QMHlo8Sb1cds8gEf5VgfvM8PcKleYaKCw_AR2pnbeM";
+    private String template_id;
     /**
      * 微信接口默认地址
      */
