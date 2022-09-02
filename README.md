@@ -11,13 +11,13 @@ wx.secret=
 wx.openId=
 
 #女朋友的生日 格式 yyyy-mm-dd
-spouse.birthday=
+weather.birthday=
 #情窦初开的日子 格式 yyyy-mm-dd
-first.day.of.love=
+weather.love=
 #生日按照哪种日历 true阴历，false洋历
-birthday.chineseDate=true
+weather.chineseDate=true
 #消息模板ID
-message.template.id=
+weather.templateId=
 ```
 2. 模板内容信息如下
 
