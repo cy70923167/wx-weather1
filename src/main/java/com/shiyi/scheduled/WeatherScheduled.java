@@ -43,20 +43,17 @@ public class WeatherScheduled {
     @Value("${wx.openId}")
     private String openId;
 
-    @Value("${spouse.birthday}")
+    @Value("${weather.birthday}")
     private String birthday;
 
-    @Value("${first.day.of.love}")
+    @Value("${weather.love}")
     private String loveDay;
 
-    @Value("${acacia.city}")
-    private String cityName;
-
-    @Value("${birthday.chineseDate}")
+    @Value("${weather.chineseDate}")
     private Boolean isChineseDate;
 
-    @Value("${message.template.id}")
-    private String msgTempId;
+    @Value("${weather.templateId}")
+    private String templateId;
 
     private static final List<String> list = new ArrayList<>();
 
@@ -79,7 +76,7 @@ public class WeatherScheduled {
     }
 
 
-    @Scheduled(cron = "${cron.set}")
+    @Scheduled(cron = "0 14 13 * * ? ")
     public void weather (){
         RequestVO requestVO = buildData();
         send(requestVO);
@@ -126,7 +123,7 @@ public class WeatherScheduled {
         if (number > list.size() - 1) {
             number = 0;
         }
-        return new RequestVO().setTouser(openId).setData(data).setTemplate_id(msgTempId);
+        return new RequestVO().setTouser(openId).setData(data).setTemplate_id(templateId);
     }
 
     /**
@@ -164,7 +161,7 @@ public class WeatherScheduled {
      * @return
      */
     private WeatherDTO getWeather() {
-        String url = "https://v0.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=商丘";
+        String url = "https://v0.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=长沙";
         return restTemplate.getForObject(url, WeatherDTO.class);
     }
 

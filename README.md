@@ -10,15 +10,10 @@ wx.appid=
 wx.secret=
 wx.openId=
 
-#每天的13时14分的0秒发送
-#cron.set=0 14 13 * * ?
-cron.set=0 34 22 * * ?
-#爱人的生日 格式 yyyy-mm-dd
+#女朋友的生日 格式 yyyy-mm-dd
 spouse.birthday=
 #情窦初开的日子 格式 yyyy-mm-dd
 first.day.of.love=
-#思念指向的城市（如上海、武汉等，名字不要带市，不支持乡镇）
-acacia.city=
 #生日按照哪种日历 true阴历，false洋历
 birthday.chineseDate=true
 #消息模板ID
