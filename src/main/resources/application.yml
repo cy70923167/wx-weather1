@@ -1,14 +1,14 @@
 wx:
-  appid=
-  secret=
-  openId=
+  appid:
+  secret:
+  openId:
 
 weather:
-  #?????? ?? yyyy-mm-dd
-  birthday=
-  #??????? ?? yyyy-mm-dd
-  love=
-  #???????? true???false??
-  chineseDate=true
-  #????ID
-  templateId=
+  #女朋友的生日 yyyy-mm-dd
+  birthday:
+  #第一次在一起的日子 yyyy-mm-dd
+  love:
+  # 生日是阴历还是阳历
+  chineseDate: true
+  #模板ID
+  templateId:
