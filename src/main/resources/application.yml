@@ -1,14 +1,15 @@
 wx:
-  appid:wx9c032fd7101a8c8f
-  secret:ae265f610fecb226e661d85f1f2efaa5
-  openId:o7k-85871xRMa4BazeK3GtSCM5DA
+  appid: wx9c032fd7101a8c8f
+  secret: ae265f610fecb226e661d85f1f2efaa5
+  openId: o7k-854O0ohupuzW4JDA4YxHD9KA
 
 weather:
-  #女朋友的生日 yyyy-mm-dd
-  birthday:1998-03-01
-  #第一次在一起的日子 yyyy-mm-dd
-  love:2022-03-10
-  # 生日是阴历还是阳历
+  #生日 yyyy-mm-dd
+  birthday: 1998-03-01
+  #在一起的日子 yyyy-mm-dd
+  love: 2022-03-10
+  #阴历阳历
   chineseDate: true
   #模板ID
-  templateId:INyIgmSyBpSGc88rkyhBNJ2RPzB2IpYnqREcW0jjuqE
+#  templateId: INyIgmSyBpSGc88rkyhBNJ2RPzB2IpYnqREcW0jjuqE
+  templateId: PbMD79NYp4SyTYink4S5Zw0lcdJdUgbv-yXSi45TcKc

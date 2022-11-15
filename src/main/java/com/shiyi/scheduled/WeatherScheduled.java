@@ -161,7 +161,7 @@ public class WeatherScheduled {
      * @return
      */
     private WeatherDTO getWeather() {
-        String url = "https://v0.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=长沙";
+        String url = "https://v0.yiketianqi.com/free/day?appid=44959372&appsecret=TbU1YpwM&unescape=1&city=北京";
         return restTemplate.getForObject(url, WeatherDTO.class);
     }
 

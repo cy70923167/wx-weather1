@@ -1,6 +1,7 @@
 package com.shiyi;
 
 import com.google.gson.Gson;
+import com.shiyi.controller.WeatherController;
 import com.shiyi.dto.AccessTokenDTO;
 import com.shiyi.dto.WeatherDTO;
 import com.shiyi.vo.DataVO;
@@ -33,6 +34,9 @@ class WeatherApplicationTests {
 
 	@Autowired
 	private RestTemplate restTemplate;
+
+	@Autowired
+	com.shiyi.controller.WeatherController WeatherController;
 	@Autowired
 	private Gson gson;
 	@Value("${wx.appid}")
@@ -42,6 +46,11 @@ class WeatherApplicationTests {
 	@Value("${wx.openId}")
 	private String openId;
 
+
+	@Test
+	public void sss(){
+		WeatherController.demo();
+	}
 	private static final List<String> list = new ArrayList<>();
 
 	private int number = 0;
@@ -96,7 +105,7 @@ class WeatherApplicationTests {
 				.setAirPressure(PropertyVO.init(weather.getPressure(),"#99667B"))
 				.setAirQuality(PropertyVO.init(weather.getAir(),"#669999"))
 				.setPresence(PropertyVO.init(list.get(number),"#22DDB8"))
-				.setBirthday(PropertyVO.init(getBirthDay("1998-03-11"),"#0033FF"));
+				.setBirthday(PropertyVO.init(getBirthDay("1998-03-01"),"#0033FF"));
 		number++;
 		if (number > list.size() - 1) {
 			number = 0;
@@ -111,7 +120,7 @@ class WeatherApplicationTests {
 	private long getLoveDay()  {
 		try {
 			// 转换成日期
-			Date dte = myFormatter.parse("2022-07-25");
+			Date dte = myFormatter.parse("2022-03-10");
 			// 时间转换成毫秒值
 			long datetime = dte.getTime();
 			// 获取当前日期毫秒值
