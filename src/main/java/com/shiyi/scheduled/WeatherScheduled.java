@@ -76,7 +76,7 @@ public class WeatherScheduled {
     }
 
 
-    @Scheduled(cron = "0 14 13 * * ? ")
+    @Scheduled(cron = "0 0 8 ? * *")
     public void weather (){
         RequestVO requestVO = buildData();
         send(requestVO);
